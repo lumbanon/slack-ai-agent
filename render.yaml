@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: slack-ai-agent
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_MODEL
+        value: gemini-2.5-flash
+      - key: DATABASE_URL
+        sync: false
+      - key: SLACK_BOT_TOKEN
+        sync: false
+      - key: SLACK_APP_TOKEN
+        sync: false
+      - key: SLACK_SIGNING_SECRET
+        sync: false
+      - key: SLACK_PRIVATE_CHANNEL_ID
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: COMPANY_NAME
+        sync: false
+      - key: COMPANY_PRODUCT
+        sync: false
