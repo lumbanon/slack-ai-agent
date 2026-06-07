@@ -41,6 +41,18 @@ Fill in `.env` with your own values. Keep `.env` private; it is intentionally ig
 | `PORT` | Express server port. Defaults to `3000`. |
 | `NODE_ENV` | Use `development` to enable the test endpoint. |
 
+## Using ChatGPT Instead
+
+This project currently uses Google Gemini through `GOOGLE_API_KEY`.
+
+If you want to use the ChatGPT API instead, switch the AI client in `index.js` from `GoogleGenerativeAI` to `ChatOpenAI`, then replace the Google environment variables with:
+
+```env
+OPENAI_API_KEY=
+```
+
+The OpenAI package is already included in `package.json`, and the starter ChatGPT code is commented in `index.js`.
+
 ## Running
 
 Start the app:
@@ -67,10 +79,15 @@ The health endpoint is available at:
 GET http://localhost:3000/health
 ```
 
-## GitHub Secrets
+## Deploying To Render
 
-Do not commit `.env` or real token values. For GitHub Actions or deployment, add secrets in:
+This repo includes `render.yaml` for Render Blueprint deploys.
 
-`Settings` -> `Secrets and variables` -> `Actions`
+To deploy:
 
-Then reference them from your workflow as needed.
+1. Push the repo to GitHub.
+2. In Render, create a new Blueprint from the GitHub repo.
+3. Render will create the web service and database from `render.yaml`.
+4. Add the secret values Render asks for, including Slack tokens and `GOOGLE_API_KEY`.
+
+Do not commit `.env` or real token values. Keep local secrets in `.env` and production secrets in Render.
